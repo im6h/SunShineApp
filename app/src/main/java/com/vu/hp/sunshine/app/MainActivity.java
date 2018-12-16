@@ -27,8 +27,19 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.vu.hp.sunshine.app.Adapter.ViewPaperAdapter;
 import com.vu.hp.sunshine.app.Common.Common;
 import com.vu.hp.sunshine.app.Model.Main;
+import com.vu.hp.sunshine.app.Model.WeatherResult;
+import com.vu.hp.sunshine.app.Retrofit.IOpenWeatherMap;
+import com.vu.hp.sunshine.app.Retrofit.RetrofitClient;
 
 import java.util.List;
+
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Retrofit;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -54,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
         // Request Permisson
 
