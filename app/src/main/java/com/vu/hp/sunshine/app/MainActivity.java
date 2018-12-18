@@ -118,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPaper(ViewPager viewPager) {
         ViewPaperAdapter adapter = new ViewPaperAdapter(getSupportFragmentManager());
         adapter.addFragment(TodayWeatherFragment.getInstances(),"Today");
+        adapter.addFragment(ForcecastFragment.getInstances(),"5 day");
         viewPager.setAdapter(adapter);
     }
 

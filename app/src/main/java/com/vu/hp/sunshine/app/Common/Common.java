@@ -24,4 +24,5 @@ public class Common {
         String formatDate = simpleDateFormat.format(date);
         return formatDate;
     }
+
 }

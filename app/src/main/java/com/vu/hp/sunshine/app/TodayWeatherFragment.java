@@ -3,6 +3,7 @@ package com.vu.hp.sunshine.app;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,6 @@ public class TodayWeatherFragment extends Fragment {
     TextView tv_city, tv_description, tv_temprature, tv_wind, tv_datetime, tv_cloud,
             tv_coord, tv_pressure, tv_humidity, tv_sunshine, tv_sunset;
     CompositeDisposable compositeDisposable;
-    Disposable disposable;
     IOpenWeatherMap mService;
 
     public static TodayWeatherFragment getInstances() {
@@ -92,8 +92,8 @@ public class TodayWeatherFragment extends Fragment {
                         // load data
                         tv_city.setText(weatherResult.getName());
                         tv_description.setText(new StringBuilder("Weather in ").append(weatherResult.getName()).toString());
-                        tv_temprature.setText(new StringBuilder(String.valueOf(weatherResult.getMain().getTemp())).append(" C").toString());
-                        tv_pressure.setText(new StringBuilder(String.valueOf(weatherResult.getMain().getPressure())).append("Hpa").toString());
+                        tv_temprature.setText(new StringBuilder(String.valueOf(weatherResult.getMain().getTemp())).append("°F").toString());
+                        tv_pressure.setText(new StringBuilder(String.valueOf(weatherResult.getMain().getPressure())).append(" Hpa").toString());
                         tv_wind.setText(new StringBuilder(String.valueOf(weatherResult.getWind().getSpeed())).append("km/h-").append(String.valueOf(weatherResult.getWind().getDeg())).append("").toString());
                         tv_humidity.setText(new StringBuilder(String.valueOf(weatherResult.getMain().getHumidity())).append("%").toString());
                         tv_sunset.setText(Common.convertUnixToSunSeet(weatherResult.getSys().getSunset()));
@@ -107,7 +107,7 @@ public class TodayWeatherFragment extends Fragment {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        Toast.makeText(getActivity(), "" + throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "ERROR" + throwable.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }));
     }

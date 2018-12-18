@@ -1,6 +1,7 @@
 package com.vu.hp.sunshine.app.Retrofit;
 
 
+import com.vu.hp.sunshine.app.Model.WeatherForceCastResult;
 import com.vu.hp.sunshine.app.Model.WeatherResult;
 
 import io.reactivex.Observable;
@@ -27,5 +28,11 @@ public interface IOpenWeatherMap {
                                                  @Query("lon") String lng,
                                                  @Query("appid") String appid,
                                                  @Query("units") String unit);
+
+    @GET("forecast")
+    Observable<WeatherForceCastResult> getForceCastWeatherByLatLng(@Query("lat") String lat,
+                                                                   @Query("lon") String lng,
+                                                                   @Query("appid") String appid,
+                                                                   @Query("units") String unit);
 
 }
