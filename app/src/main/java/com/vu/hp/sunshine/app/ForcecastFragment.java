@@ -96,9 +96,14 @@ public class ForcecastFragment extends Fragment {
     }
 
 
-    @Override
     public void onStop() {
         compositeDisposable.clear();
         super.onStop();
+    }
+
+    @Override
+    public void onDestroyView() {
+        compositeDisposable.clear();
+        super.onDestroyView();
     }
 }

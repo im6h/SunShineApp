@@ -10,7 +10,7 @@ public class Common {
     public static final String HOME_PAGE = "https://api.openweathermap.org/data/2.5/";
     public static final String HOME_ICON = "https://openweathermap.org/img/w/";
 
-    public static Location current_location;
+    public static Location current_location = null;
 
     public static String convertUnixToDate(int dt) {
         Date date = new Date(dt*1000L);

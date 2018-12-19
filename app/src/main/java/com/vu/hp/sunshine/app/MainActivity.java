@@ -62,9 +62,10 @@ public class MainActivity extends AppCompatActivity {
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.root_view);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(MainActivity.this);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Request Permisson
 
@@ -82,43 +83,44 @@ public class MainActivity extends AppCompatActivity {
 
                                 return;
                             }
-                            fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(MainActivity.this);
+//                            fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(MainActivity.this);
                             fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
                         }
                     }
 
                     @Override
                     public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
-                        Snackbar.make(coordinatorLayout,"Permisson Denied",Snackbar.LENGTH_LONG)
+                        Snackbar.make(coordinatorLayout, "Permisson Denied", Snackbar.LENGTH_LONG)
                                 .show();
                     }
                 }).check();
     }
 
     private void buildLocationCallBack() {
-        locationCallback = new LocationCallback(){
+        locationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(LocationResult locationResult) {
                 super.onLocationResult(locationResult);
 
                 Common.current_location = locationResult.getLastLocation();
-                viewPager = (ViewPager)findViewById(R.id.view_paper);
+                viewPager = (ViewPager) findViewById(R.id.view_paper);
                 setupViewPaper(viewPager);
 
-                tabLayout = (TabLayout)findViewById(R.id.tabs);
+                tabLayout = (TabLayout) findViewById(R.id.tabs);
                 tabLayout.setupWithViewPager(viewPager);
 
                 // log
-                Log.d("Location",locationResult.getLastLocation().getLatitude()+ "/" +
-                                    locationResult.getLastLocation().getLongitude());
+                Log.d("Location", locationResult.getLastLocation().getLatitude() + "/" +
+                        locationResult.getLastLocation().getLongitude());
             }
         };
     }
 
     private void setupViewPaper(ViewPager viewPager) {
         ViewPaperAdapter adapter = new ViewPaperAdapter(getSupportFragmentManager());
-        adapter.addFragment(TodayWeatherFragment.getInstances(),"Today");
-        adapter.addFragment(ForcecastFragment.getInstances(),"5 day");
+        adapter.addFragment(TodayWeatherFragment.getInstances(), "Today");
+        adapter.addFragment(ForcecastFragment.getInstances(), "5 day");
+        adapter.addFragment(CityFragment.getInstances(), "Search City");
         viewPager.setAdapter(adapter);
     }
 
