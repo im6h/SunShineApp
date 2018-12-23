@@ -121,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(TodayWeatherFragment.getInstances(), "Today");
         adapter.addFragment(ForcecastFragment.getInstances(), "5 day");
         adapter.addFragment(CityFragment.getInstances(), "Search City");
+        adapter.addFragment(AboutAuthor.getInstances(),"About me ");
         viewPager.setAdapter(adapter);
     }
 
